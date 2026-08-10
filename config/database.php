@@ -1,27 +1,12 @@
 <?php
+class Database {
+    public static function conectar() {
+        $conexion = new mysqli("localhost", "root", "", "sistema_inscripcion_talleres");
 
-class Database
-{
-
-    private $host = "db";
-    private $db = "appdb";
-    private $user = "appuser";
-    private $pass = "apppass";
-
-    public function connect()
-    {
-
-        $conn = new mysqli(
-            $this->host,
-            $this->user,
-            $this->pass,
-            $this->db
-        );
-
-        if ($conn->connect_error) {
-            die("Error conexión: " . $conn->connect_error);
+        if ($conexion->connect_error) {
+            die("Error de conexión: " . $conexion->connect_error);
         }
 
-        return $conn;
+        return $conexion;
     }
 }

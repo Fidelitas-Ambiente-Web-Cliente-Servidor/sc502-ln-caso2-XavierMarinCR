@@ -1,41 +1,13 @@
 <?php
-class Taller
-{
+require_once "../config/database.php";
 
-    private $conn;
+class Taller {
+    public static function obtenerTalleres() {
+        $db = Database::conectar();
+        $sql = "SELECT * FROM talleres";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
 
-    public function __construct($db)
-    {
-        $this->conn = $db;
-    }
-
-    public function getAll()
-    {
-        $result = $this->conn->query("SELECT * FROM talleres ORDER BY nombre");
-        $talleres = [];
-        while ($row = $result->fetch_assoc()) {
-            $talleres[] = $row;
-        }
-        return $talleres;
-    }
-
-    public function getAllDisponibles()
-    {
-
-    }
-
-    public function getById($id)
-    {
-    
-    }
-
-    public function descontarCupo($tallerId)
-    {
-
-    }
-
-    public function sumarCupo($tallerId)
-    {
-
+        return $stmt->get_result();
     }
 }
